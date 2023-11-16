@@ -26,8 +26,11 @@ function App() {
 
   const updateNoteMutation = useMutation({
     mutationFn: updateNote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes']})
+    onSuccess: (changedNote) => {
+      const notes = queryClient.getQueryData(['notes'])
+      const mutatedNotes = notes.map(n => n.id === changedNote.id ? changedNote : n)
+      queryClient.setQueryData(['notes'], mutatedNotes)
+      // queryClient.invalidateQueries({ queryKey: ['notes']})
     }
   })
 
