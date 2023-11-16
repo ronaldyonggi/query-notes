@@ -38,6 +38,9 @@ function App() {
     updateNoteMutation.mutate({...note, important: !note.important})
   }
 
+
+  // ========================== DISPLAY NOTES =====================
+
   const result = useQuery({
     queryKey: ['notes'],
     queryFn: getNotes
