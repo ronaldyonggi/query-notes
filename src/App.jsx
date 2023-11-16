@@ -43,7 +43,8 @@ function App() {
 
   const result = useQuery({
     queryKey: ['notes'],
-    queryFn: getNotes
+    queryFn: getNotes,
+    refetchOnWindowFocus: false
   })
   // console.log(JSON.parse(JSON.stringify(result)))
 
