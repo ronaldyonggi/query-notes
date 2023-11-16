@@ -8,8 +8,10 @@ function App() {
   // ========================== ADDING NEW NOTE =====================
   const newNoteMutation = useMutation({ 
     mutationFn: createNote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes']})
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData(['notes'])
+      // queryClient.invalidateQueries({ queryKey: ['notes']})
+      queryClient.setQueryData(['notes'], notes.concat(newNote))
     }
   })
 
