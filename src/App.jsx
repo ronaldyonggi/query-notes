@@ -35,7 +35,7 @@ function App() {
   })
 
   const toggleImportance = note => {
-    updateNoteMutation({...note, important: !note.important})
+    updateNoteMutation.mutate({...note, important: !note.important})
   }
 
   const result = useQuery({
