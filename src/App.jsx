@@ -1,26 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import './App.css'
-import { getNotes, createNote, updateNote } from './requests'
+import { getNotes, updateNote } from './requests'
+import NoteForm from './components/NoteForm'
 
 function App() {
   const queryClient = useQueryClient()
-
-  // ========================== ADDING NEW NOTE =====================
-  const newNoteMutation = useMutation({ 
-    mutationFn: createNote,
-    onSuccess: (newNote) => {
-      const notes = queryClient.getQueryData(['notes'])
-      // queryClient.invalidateQueries({ queryKey: ['notes']})
-      queryClient.setQueryData(['notes'], notes.concat(newNote))
-    }
-  })
-
-  const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    newNoteMutation.mutate({ content, important: true })
-  }
 
   // ========================== TOGGLE NOTE IMPORTANCE =====================
 
@@ -57,10 +41,11 @@ function App() {
   return (
     <div>
       <h2>Notes app</h2>
-      <form onSubmit={addNote}>
+      {/* <form onSubmit={addNote}>
         <input name='note' />
         <button type='submit'>add</button>
-      </form>
+      </form> */}
+      <NoteForm />
 
       {notes.map(note => 
         <li key={note.id} onClick={() => toggleImportance(note)}>
