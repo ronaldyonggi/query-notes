@@ -23,10 +23,6 @@ function App() {
   return (
     <div>
       <h2>Notes app</h2>
-      {/* <form onSubmit={addNote}>
-        <input name='note' />
-        <button type='submit'>add</button>
-      </form> */}
       <NoteForm />
 
       {notes.map(note => 
